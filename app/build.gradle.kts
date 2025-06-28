@@ -97,4 +97,14 @@ dependencies {
 
     // Immutable Collections
     implementation(libs.kotlinx.collections.immutable)
+
+    // Compose Foundation
+    implementation(libs.compose.foundation)
+
+    // testing
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockk)
+    testImplementation(kotlin("test"))
 }
