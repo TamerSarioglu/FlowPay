@@ -1,6 +1,6 @@
 package com.tamersarioglu.flowpay.domain.repository
 
-import com.tamersarioglu.flowpay.data.database.subcription.Subscription
+import com.tamersarioglu.flowpay.domain.model.Subscription
 import com.tamersarioglu.flowpay.domain.model.AnalyticsData
 import com.tamersarioglu.flowpay.domain.model.SpendingPeriodData
 import com.tamersarioglu.flowpay.domain.model.TimePeriod

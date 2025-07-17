@@ -3,8 +3,8 @@ package com.tamersarioglu.flowpay.di
 import android.content.Context
 import androidx.room.Room
 import com.tamersarioglu.flowpay.data.database.paymenthistory.PaymentHistoryDao
-import com.tamersarioglu.flowpay.data.database.subcription.SubscriptionDao
-import com.tamersarioglu.flowpay.data.database.subcription.SubscriptionDatabase
+import com.tamersarioglu.flowpay.data.database.subscription.SubscriptionDao
+import com.tamersarioglu.flowpay.data.database.subscription.SubscriptionDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

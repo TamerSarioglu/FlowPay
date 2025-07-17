@@ -60,6 +60,7 @@ import com.tamersarioglu.flowpay.domain.model.TimePeriod
 import com.tamersarioglu.flowpay.domain.model.UpcomingPayment
 import com.tamersarioglu.flowpay.presentation.ui.components.CategoryIndicator
 import com.tamersarioglu.flowpay.presentation.ui.components.LoadingCard
+import com.tamersarioglu.flowpay.presentation.ui.theme.color
 import com.tamersarioglu.flowpay.presentation.viewmodel.AnalyticsViewModel
 import kotlinx.collections.immutable.PersistentList
 

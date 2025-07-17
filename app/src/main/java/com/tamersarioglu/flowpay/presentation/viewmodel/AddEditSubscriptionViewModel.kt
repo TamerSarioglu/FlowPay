@@ -3,9 +3,9 @@ package com.tamersarioglu.flowpay.presentation.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tamersarioglu.flowpay.data.database.BillingInterval
-import com.tamersarioglu.flowpay.data.database.subcription.Subscription
-import com.tamersarioglu.flowpay.data.database.subcription.SubscriptionCategory
+import com.tamersarioglu.flowpay.domain.model.BillingInterval
+import com.tamersarioglu.flowpay.domain.model.Subscription
+import com.tamersarioglu.flowpay.domain.model.SubscriptionCategory
 import com.tamersarioglu.flowpay.domain.repository.SubscriptionRepository
 import com.tamersarioglu.flowpay.domain.usecase.AddSubscriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,8 +14,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.UUID
 import javax.inject.Inject
 
+/**
+ * ViewModel for adding and editing subscriptions.
+ * This is part of the presentation layer and uses domain models.
+ */
 @HiltViewModel
 class AddEditSubscriptionViewModel @Inject constructor(
     private val addSubscriptionUseCase: AddSubscriptionUseCase,
@@ -98,10 +104,12 @@ class AddEditSubscriptionViewModel @Inject constructor(
                             state.customIntervalDays.toInt() else 0,
                         startDate = state.startDate,
                         category = state.category,
-                        description = state.description.takeIf { it.isNotBlank() }
+                        description = state.description.takeIf { it.isNotBlank() },
+                        updatedAt = LocalDateTime.now()
                     )
                 } else {
                     Subscription(
+                        id = UUID.randomUUID().toString(),
                         name = state.name,
                         price = state.price.toDouble(),
                         billingInterval = state.billingInterval,
@@ -110,7 +118,9 @@ class AddEditSubscriptionViewModel @Inject constructor(
                         startDate = state.startDate,
                         nextBillingDate = state.startDate,
                         category = state.category,
-                        description = state.description.takeIf { it.isNotBlank() }
+                        description = state.description.takeIf { it.isNotBlank() },
+                        createdAt = LocalDateTime.now(),
+                        updatedAt = LocalDateTime.now()
                     )
                 }
 
@@ -140,6 +150,10 @@ class AddEditSubscriptionViewModel @Inject constructor(
     }
 }
 
+/**
+ * UI state for the add/edit subscription screen.
+ * This is part of the presentation layer.
+ */
 data class AddEditSubscriptionUiState(
     val name: String = "",
     val price: String = "",

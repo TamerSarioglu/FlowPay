@@ -1,10 +1,17 @@
 package com.tamersarioglu.flowpay.domain.util
 
 import android.annotation.SuppressLint
-import com.tamersarioglu.flowpay.data.database.BillingInterval
-import com.tamersarioglu.flowpay.data.database.subcription.Subscription
+import com.tamersarioglu.flowpay.domain.model.BillingInterval
+import com.tamersarioglu.flowpay.domain.model.Subscription
+import com.tamersarioglu.flowpay.domain.model.SubscriptionCategory
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.UUID
 
+/**
+ * Utility class for billing calculations.
+ * This is part of the domain layer and works with domain models.
+ */
 object BillingCalculator {
     
     /**
@@ -97,14 +104,14 @@ object BillingCalculator {
         
         return buildString {
             appendLine("Subscription: ${subscription.name}")
-            appendLine("Price: $${String.format("%.2f", subscription.price)}")
+            appendLine("Price: ${String.format("%.2f", subscription.price)}")
             appendLine("Interval: ${subscription.billingInterval.displayName}")
             if (subscription.billingInterval == BillingInterval.CUSTOM) {
                 appendLine("Custom Days: ${subscription.customIntervalDays}")
             }
-            appendLine("Monthly Equivalent: $${String.format("%.2f", monthly)}")
-            appendLine("Yearly Equivalent: $${String.format("%.2f", yearly)}")
-            appendLine("Daily Equivalent: $${String.format("%.4f", daily)}")
+            appendLine("Monthly Equivalent: ${String.format("%.2f", monthly)}")
+            appendLine("Yearly Equivalent: ${String.format("%.2f", yearly)}")
+            appendLine("Daily Equivalent: ${String.format("%.4f", daily)}")
         }
     }
     
@@ -142,13 +149,16 @@ object BillingCalculator {
         customDays: Int = 0
     ): Subscription {
         return Subscription(
+            id = UUID.randomUUID().toString(),
             name = name,
             price = price,
             billingInterval = interval,
             customIntervalDays = customDays,
             startDate = LocalDate.now(),
             nextBillingDate = LocalDate.now(),
-            category = com.tamersarioglu.flowpay.data.database.subcription.SubscriptionCategory.ENTERTAINMENT
+            category = SubscriptionCategory.ENTERTAINMENT,
+            createdAt = LocalDateTime.now(),
+            updatedAt = LocalDateTime.now()
         )
     }
-} 
+}

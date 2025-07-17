@@ -34,6 +34,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import com.tamersarioglu.flowpay.presentation.ui.theme.color
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -50,7 +51,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tamersarioglu.flowpay.data.database.subcription.Subscription
+import com.tamersarioglu.flowpay.domain.model.Subscription
 import com.tamersarioglu.flowpay.presentation.ui.components.CategoryIndicator
 import com.tamersarioglu.flowpay.presentation.ui.components.EmptyStateCard
 import com.tamersarioglu.flowpay.presentation.ui.components.LoadingCard

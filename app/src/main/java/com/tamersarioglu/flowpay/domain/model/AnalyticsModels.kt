@@ -1,7 +1,5 @@
 package com.tamersarioglu.flowpay.domain.model
 
-import com.tamersarioglu.flowpay.data.database.subcription.Subscription
-import com.tamersarioglu.flowpay.data.database.subcription.SubscriptionCategory
 import kotlinx.collections.immutable.PersistentList
 import java.time.YearMonth
 

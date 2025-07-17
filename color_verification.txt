@@ -1,0 +1,27 @@
+Color Value Verification:
+
+Enum Values (from SubscriptionCategory.kt):
+ENTERTAINMENT: 0xFF9C27B0
+PRODUCTIVITY: 0xFF2196F3
+HEALTH: 0xFF4CAF50
+EDUCATION: 0xFFFF9800
+UTILITIES: 0xFFF44336
+SHOPPING: 0xFFE91E63
+FINANCE: 0xFF795548
+NEWS: 0xFF3F51B5
+GAMING: 0xFF009688
+OTHER: 0xFF607D8B
+
+Theme Values (from Color.kt):
+CategoryEntertainment: 0xFF9C27B0
+CategoryProductivity: 0xFF2196F3
+CategoryHealth: 0xFF4CAF50
+CategoryEducation: 0xFFFF9800
+CategoryUtilities: 0xFFF44336
+CategoryShopping: 0xFFE91E63
+CategoryFinance: 0xFF795548
+CategoryNews: 0xFF3F51B5
+CategoryGaming: 0xFF009688
+CategoryOther: 0xFF607D8B
+
+VERIFICATION: ✓ ALL COLOR VALUES MATCH EXACTLY

@@ -1,6 +1,4 @@
-package com.tamersarioglu.flowpay.data.database.subcription
-
-import androidx.compose.ui.graphics.Color
+package com.tamersarioglu.flowpay.domain.model
 
 enum class SubscriptionCategory(val displayName: String, val colorValue: Long) {
     ENTERTAINMENT("Entertainment", 0xFF9C27B0),
@@ -9,7 +7,8 @@ enum class SubscriptionCategory(val displayName: String, val colorValue: Long) {
     EDUCATION("Education", 0xFFFF9800),
     UTILITIES("Utilities", 0xFFF44336),
     SHOPPING("Shopping", 0xFFE91E63),
-    OTHER("Other", 0xFF607D8B);
-
-    val color: Color get() = Color(colorValue)
+    FINANCE("Finance", 0xFF795548),
+    NEWS("News & Media", 0xFF3F51B5),
+    GAMING("Gaming", 0xFF009688),
+    OTHER("Other", 0xFF607D8B)
 }

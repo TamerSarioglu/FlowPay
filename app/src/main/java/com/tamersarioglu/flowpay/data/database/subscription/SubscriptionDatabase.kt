@@ -1,4 +1,4 @@
-package com.tamersarioglu.flowpay.data.database.subcription
+package com.tamersarioglu.flowpay.data.database.subscription
 
 import android.content.Context
 import androidx.room.Database
@@ -9,7 +9,7 @@ import com.tamersarioglu.flowpay.data.database.Converters
 import com.tamersarioglu.flowpay.data.database.paymenthistory.PaymentHistory
 import com.tamersarioglu.flowpay.data.database.paymenthistory.PaymentHistoryDao
 
-@Database([Subscription::class, PaymentHistory::class], version = 1, exportSchema = false)
+@Database([SubscriptionEntity::class, PaymentHistory::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class SubscriptionDatabase : RoomDatabase() {
 

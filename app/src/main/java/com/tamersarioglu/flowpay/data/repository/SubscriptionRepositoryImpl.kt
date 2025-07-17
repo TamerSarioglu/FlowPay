@@ -2,14 +2,15 @@ package com.tamersarioglu.flowpay.data.repository
 
 import com.tamersarioglu.flowpay.data.database.paymenthistory.MonthlySpendingResult
 import com.tamersarioglu.flowpay.data.database.paymenthistory.PaymentHistoryDao
-import com.tamersarioglu.flowpay.data.database.subcription.Subscription
-import com.tamersarioglu.flowpay.data.database.subcription.SubscriptionCategory
-import com.tamersarioglu.flowpay.data.database.subcription.SubscriptionDao
+import com.tamersarioglu.flowpay.data.database.subscription.SubscriptionDao
+import com.tamersarioglu.flowpay.data.mapper.SubscriptionMapper
 import com.tamersarioglu.flowpay.domain.model.AnalyticsData
 import com.tamersarioglu.flowpay.domain.model.CategorySpending
 import com.tamersarioglu.flowpay.domain.model.MonthlySpending
 import com.tamersarioglu.flowpay.domain.model.SpendingPeriodData
 import com.tamersarioglu.flowpay.domain.model.SpendingTrend
+import com.tamersarioglu.flowpay.domain.model.Subscription
+import com.tamersarioglu.flowpay.domain.model.SubscriptionCategory
 import com.tamersarioglu.flowpay.domain.model.TimePeriod
 import com.tamersarioglu.flowpay.domain.model.UpcomingPayment
 import com.tamersarioglu.flowpay.domain.repository.SubscriptionRepository
@@ -17,43 +18,56 @@ import com.tamersarioglu.flowpay.domain.util.BillingCalculator
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 import kotlin.random.Random
 
+/**
+ * Implementation of the SubscriptionRepository interface.
+ * This is part of the data layer and handles data operations.
+ */
 class SubscriptionRepositoryImpl @Inject constructor(
     private val subscriptionDao: SubscriptionDao,
     private val paymentHistoryDao: PaymentHistoryDao
 ) : SubscriptionRepository {
+    
     override fun getActiveSubscriptions(): Flow<List<Subscription>> {
         return subscriptionDao.getActiveSubscriptions()
+            .map { entities -> SubscriptionMapper.mapToDomainList(entities) }
     }
 
     override fun getAllSubscriptions(): Flow<List<Subscription>> {
         return subscriptionDao.getAllSubscriptions()
+            .map { entities -> SubscriptionMapper.mapToDomainList(entities) }
     }
 
     override suspend fun getSubscriptionById(id: String): Subscription? {
-        return subscriptionDao.getSubscriptionById(id)
+        val entity = subscriptionDao.getSubscriptionById(id)
+        return entity?.let { SubscriptionMapper.mapToDomain(it) }
     }
 
     override suspend fun insertSubscription(subscription: Subscription) {
-        subscriptionDao.insertSubscription(subscription)
+        val entity = SubscriptionMapper.mapToEntity(subscription)
+        subscriptionDao.insertSubscription(entity)
     }
 
     override suspend fun updateSubscription(subscription: Subscription) {
-        subscriptionDao.updateSubscription(subscription)
+        val entity = SubscriptionMapper.mapToEntity(subscription)
+        subscriptionDao.updateSubscription(entity)
     }
 
     override suspend fun deleteSubscription(subscription: Subscription) {
-        subscriptionDao.deleteSubscription(subscription)
+        val entity = SubscriptionMapper.mapToEntity(subscription)
+        subscriptionDao.deleteSubscription(entity)
     }
 
     override suspend fun getUpcomingPayments(days: Int): List<UpcomingPayment> {
         val endDate = LocalDate.now().plusDays(days.toLong())
-        val subscriptions = subscriptionDao.getSubscriptionsDueBetween(LocalDate.now(), endDate)
+        val entities = subscriptionDao.getSubscriptionsDueBetween(LocalDate.now(), endDate)
+        val subscriptions = SubscriptionMapper.mapToDomainList(entities)
 
         return subscriptions.map { subscription ->
             val daysUntil =
@@ -65,7 +79,8 @@ class SubscriptionRepositoryImpl @Inject constructor(
     override suspend fun getAnalyticsData(): AnalyticsData {
         val monthlySpending = paymentHistoryDao.getMonthlySpendingHistory()
         val categorySpending = subscriptionDao.getCategorySpending()
-        val activeSubscriptions = subscriptionDao.getActiveSubscriptions().first()
+        val entities = subscriptionDao.getActiveSubscriptions().first()
+        val activeSubscriptions = SubscriptionMapper.mapToDomainList(entities)
 
         val totalMonthlySpend = activeSubscriptions.sumOf { subscription ->
             BillingCalculator.calculateMonthlyAmount(subscription)

@@ -2,7 +2,7 @@ package com.tamersarioglu.flowpay.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tamersarioglu.flowpay.data.database.subcription.Subscription
+import com.tamersarioglu.flowpay.domain.model.Subscription
 import com.tamersarioglu.flowpay.domain.repository.SubscriptionRepository
 import com.tamersarioglu.flowpay.domain.usecase.GetActiveSubscriptionsUseCase
 import com.tamersarioglu.flowpay.domain.util.BillingCalculator
@@ -16,6 +16,10 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * ViewModel for the subscription list screen.
+ * This is part of the presentation layer and uses domain models.
+ */
 @HiltViewModel
 class SubscriptionListViewModel @Inject constructor(
     private val getActiveSubscriptionsUseCase: GetActiveSubscriptionsUseCase,
@@ -64,6 +68,10 @@ class SubscriptionListViewModel @Inject constructor(
         }
     }
 
+    /**
+     * UI state for the subscription list screen.
+     * This is part of the presentation layer.
+     */
     sealed interface SubscriptionListUiState {
         data object Loading : SubscriptionListUiState
         

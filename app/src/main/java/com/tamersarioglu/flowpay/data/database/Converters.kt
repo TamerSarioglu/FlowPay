@@ -1,7 +1,7 @@
 package com.tamersarioglu.flowpay.data.database
 
 import androidx.room.TypeConverter
-import com.tamersarioglu.flowpay.data.database.subcription.SubscriptionCategory
+import com.tamersarioglu.flowpay.domain.model.SubscriptionCategory
 import java.time.LocalDate
 import java.time.LocalDateTime
 

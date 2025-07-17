@@ -49,9 +49,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tamersarioglu.flowpay.data.database.BillingInterval
-import com.tamersarioglu.flowpay.data.database.subcription.SubscriptionCategory
+import com.tamersarioglu.flowpay.domain.model.BillingInterval
+import com.tamersarioglu.flowpay.domain.model.SubscriptionCategory
 import com.tamersarioglu.flowpay.presentation.ui.components.CategoryIndicator
+import com.tamersarioglu.flowpay.presentation.ui.theme.color
 import com.tamersarioglu.flowpay.presentation.viewmodel.AddEditSubscriptionViewModel
 import java.time.Instant
 import java.time.LocalDate

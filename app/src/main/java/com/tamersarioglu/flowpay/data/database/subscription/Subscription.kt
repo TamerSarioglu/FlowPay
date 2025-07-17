@@ -1,17 +1,22 @@
-package com.tamersarioglu.flowpay.data.database.subcription
+package com.tamersarioglu.flowpay.data.database.subscription
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.tamersarioglu.flowpay.data.database.BillingInterval
 import com.tamersarioglu.flowpay.data.database.Converters
+import com.tamersarioglu.flowpay.domain.model.SubscriptionCategory
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 
+/**
+ * Database entity representing a subscription.
+ * This is part of the data layer and is used for Room database operations.
+ */
 @Entity(tableName = "subscriptions")
 @TypeConverters(Converters::class)
-data class Subscription(
+data class SubscriptionEntity(
     @PrimaryKey val id: String = UUID.randomUUID().toString(),
     val name: String,
     val price: Double,
